@@ -1,5 +1,5 @@
 const express = require('express');
-const nodemailer = require('nodemailer');
+const nodemailer = require("nodemailer");
 const cors = require('cors');
 const bodyParser = require('body-parser');
 
@@ -15,8 +15,9 @@ let smtp_password = process.env.SMTP_PASSWORD || "___";
 // create reusable transporter object using the default SMTP transport
 
 let transporter = nodemailer.createTransport({
-    service: 'gmail',
-    port: 25,//587,
+    host: "smtp.ethereal.email",
+    // service: 'gmail',
+    port: 587,//587,
     secure: false, // true for 465, false for other ports
     tls: {
         rejectUnauthorized: false
