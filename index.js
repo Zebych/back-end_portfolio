@@ -23,7 +23,7 @@ let transporter = nodemailer.createTransport({
         rejectUnauthorized: false
     },
 
-     auth: {
+    auth: {
         user: smtp_login, // generated ethereal user
         pass: smtp_password, // generated ethereal password
     },
