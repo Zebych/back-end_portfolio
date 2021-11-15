@@ -15,14 +15,12 @@ let smtp_password = process.env.SMTP_PASSWORD || "___";
 // create reusable transporter object using the default SMTP transport
 
 let transporter = nodemailer.createTransport({
-    host: "smtp.ethereal.email",
-    // service: 'gmail',
+    service: 'gmail',
     port: 587,//587,
     secure: false, // true for 465, false for other ports
-    tls: {
+/*    tls: {
         rejectUnauthorized: false
-    },
-
+    },*/
     auth: {
         user: smtp_login, // generated ethereal user
         pass: smtp_password, // generated ethereal password
