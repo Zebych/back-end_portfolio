@@ -1,16 +1,16 @@
 const express = require('express');
 const nodemailer = require('nodemailer');
 const cors = require('cors');
-const bodyParser = require('body-parser')
+const bodyParser = require('body-parser');
 
 const app = express();
 
 app.use(cors());
-app.use(bodyParser.urlencoded({extended: false}))
-app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.json());
 
-let smtp_login = process.env.SMTP_LOGIN
-let smtp_password = process.env.SMTP_PASSWORD
+let smtp_login = process.env.SMTP_LOGIN || "___";
+let smtp_password = process.env.SMTP_PASSWORD || "___";
 
 // create reusable transporter object using the default SMTP transport
 let transporter = nodemailer.createTransport({
@@ -51,8 +51,11 @@ message:${message}
 <a href='https://www.codewars.com/users/Zebych/completed_solutions'>codewars</a>
 </div>`,
     });
-    res.send('yes')
+    res.send('ok');
 })
-app.listen(3010, function () {
-    console.log("Example")
+
+let port = process.env.PORT || 3010;
+
+app.listen(port, function () {
+    console.log("Example");
 })
