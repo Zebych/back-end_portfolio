@@ -7,8 +7,8 @@ app.use(cors({"origin": "*"}));
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 
-let smtp_login = process.env.SMTP_LOGIN
-let smtp_password = process.env.SMTP_PASSWORD
+/*let smtp_login = process.env.SMTP_LOGIN
+let smtp_password = process.env.SMTP_PASSWORD*/
 
 let transporter = nodemailer.createTransport({
     service: 'smtp.gmail.com',
@@ -18,8 +18,8 @@ let transporter = nodemailer.createTransport({
         rejectUnauthorized: false
     },
     auth: {
-        user: smtp_login, // generated ethereal user
-        pass: smtp_password, // generated ethereal password
+        user: "sanechek050187@gmail.com", // generated ethereal user
+        pass: "tardntes", // generated ethereal password
 
     },
 });
