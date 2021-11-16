@@ -23,7 +23,10 @@ let transporter = nodemailer.createTransport({
 
     },
 });
-
+transporter.verify((err, succes) => {
+    if (err) console.log(err);
+    console.log(("your config is correct"))
+})
 app.get('/', function (req, res) {
     res.send("HELLO");
 })
