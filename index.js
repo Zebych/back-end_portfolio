@@ -1,11 +1,11 @@
 // import * as nodemailer from 'nodemailer'
 const express = require('express');
-const cors = require('cors');
+// const cors = require('cors');
 const nodemailer = require("nodemailer");
 
 const app = express();
 
-app.use(cors());
+// app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 
@@ -14,7 +14,7 @@ let smtp_password = process.env.SMTP_PASSWORD
 
 // create reusable transporter object using the default SMTP transport
 let transporter = nodemailer.createTransport({
-    service: 'smtp.mail.ru',
+    service: 'gmail',
     port: 25,//587,
     secure: false, // true for 465, false for other ports
     tls: {
