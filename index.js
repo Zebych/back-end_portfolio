@@ -3,7 +3,7 @@ const nodemailer = require("nodemailer");
 const cors = require("cors")
 
 const app = express();
-app.use(cors());
+app.use(cors({"origin": "*"}));
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 
@@ -20,6 +20,7 @@ let transporter = nodemailer.createTransport({
     auth: {
         user: smtp_login, // generated ethereal user
         pass: smtp_password, // generated ethereal password
+
     },
 });
 
@@ -50,6 +51,7 @@ message: ${message}
     res.send("HELLO");
 });
 let port = process.env.PORT || 3010
+// let port =  3010
 app.listen(port, function () {
     console.log("Example")
 })
