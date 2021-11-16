@@ -11,7 +11,7 @@ app.use(express.urlencoded({extended: true}));
 let smtp_password = process.env.SMTP_PASSWORD*/
 
 let transporter = nodemailer.createTransport({
-    service: 'smtp.gmail.com',
+    host: 'smtp.gmail.com',
     secure: false, // true for 465, false for other ports
     port: 587,//465,
     tls: {
