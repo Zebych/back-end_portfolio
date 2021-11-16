@@ -1,29 +1,26 @@
+// import * as nodemailer from 'nodemailer'
 const express = require('express');
-const nodemailer = require("nodemailer");
 const cors = require('cors');
-const bodyParser = require('body-parser');
+const nodemailer = require("nodemailer");
 
 const app = express();
 
 app.use(cors());
-app.use(bodyParser.urlencoded({extended: false}));
-app.use(bodyParser.json());
+app.use(express.json());
+app.use(express.urlencoded({extended: true}));
 
-let smtp_login = process.env.SMTP_LOGIN || "___";
-let smtp_password = process.env.SMTP_PASSWORD || "___";
+let smtp_login = process.env.SMTP_LOGIN
+let smtp_password = process.env.SMTP_PASSWORD
 
 // create reusable transporter object using the default SMTP transport
-
 let transporter = nodemailer.createTransport({
-    host: 'smtp.gmail.com',
-    // service: 'gmail',
-    port: 465,//587,
-    secure: true, // true for 465, false for other ports
-/*    tls: {
+    service: 'smtp.mail.ru',
+    port: 25,//587,
+    secure: false, // true for 465, false for other ports
+    tls: {
         rejectUnauthorized: false
-    },*/
+    },
     auth: {
-        type: 'OAuth2',
         user: smtp_login, // generated ethereal user
         pass: smtp_password, // generated ethereal password
     },
@@ -32,7 +29,7 @@ app.get('/', function (req, res) {
     res.send("HELLO");
 })
 app.post('/send', async function (req, res) {
-    let {name, email, message} = req.body
+    let {message, contacts, name} = req.body
     // send mail with defined transport object
     let info = await transporter.sendMail({
         from: "My profile page", // sender address
@@ -44,7 +41,7 @@ app.post('/send', async function (req, res) {
 name:${name}
 </div>
 <div>
-contacts: ${email}
+contacts: ${contacts}
 </div>
 <div>
 message:${message}
@@ -53,11 +50,9 @@ message:${message}
 <a href='https://www.codewars.com/users/Zebych/completed_solutions'>codewars</a>
 </div>`,
     });
-    res.send('ok');
+    res.send('yes')
 })
-
-let port = process.env.PORT || 3010;
-
+const port = process.env.PORT || 3010
 app.listen(port, function () {
-    console.log("Example");
+    console.log("Example")
 })
