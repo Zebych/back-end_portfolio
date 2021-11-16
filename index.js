@@ -28,13 +28,14 @@ app.get('/', function (req, res) {
     res.send("HELLO");
 })
 app.post('/sendMessage', async function (req, res) {
-    let {name, email, message} = req.body
-    // send mail with defined transport object
-    let info = await transporter.sendMail({
-        from: "My profile page", // sender address
-        to: "sanechek_1987@mail.ru", // list of receivers
-        subject: "тестирую", // Subject line
-        html: `<b>сообщение с моего portfolio</b>
+    try {
+        let {name, email, message} = req.body
+        // send mail with defined transport object
+        let info = await transporter.sendMail({
+            from: "My profile page", // sender address
+            to: "sanechek_1987@mail.ru", // list of receivers
+            subject: "тестирую", // Subject line
+            html: `<b>сообщение с моего portfolio</b>
 <div>
 <div>
 name: ${name}
@@ -46,7 +47,10 @@ email: ${email}
 message: ${message}
 </div>
 </div>`,
-    });
+        });
+    } catch (error) {
+        console.log(error)
+    }
 
     res.send("HELLO");
 });
