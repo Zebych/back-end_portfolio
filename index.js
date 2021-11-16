@@ -1,22 +1,19 @@
-// import * as nodemailer from 'nodemailer'
 const express = require('express');
-// const cors = require('cors');
 const nodemailer = require("nodemailer");
+const cors = require("cors")
 
 const app = express();
-
-// app.use(cors());
+app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 
 let smtp_login = process.env.SMTP_LOGIN
 let smtp_password = process.env.SMTP_PASSWORD
 
-// create reusable transporter object using the default SMTP transport
 let transporter = nodemailer.createTransport({
     service: 'gmail',
-    port: 25,//587,
     secure: false, // true for 465, false for other ports
+    port: 25,//587,
     tls: {
         rejectUnauthorized: false
     },
@@ -25,11 +22,12 @@ let transporter = nodemailer.createTransport({
         pass: smtp_password, // generated ethereal password
     },
 });
+
 app.get('/', function (req, res) {
     res.send("HELLO");
 })
-app.post('/send', async function (req, res) {
-    let {message, contacts, name} = req.body
+app.post('/sendMessage', async function (req, res) {
+    let {name, email, message} = req.body
     // send mail with defined transport object
     let info = await transporter.sendMail({
         from: "My profile page", // sender address
@@ -38,21 +36,20 @@ app.post('/send', async function (req, res) {
         html: `<b>сообщение с моего portfolio</b>
 <div>
 <div>
-name:${name}
+name: ${name}
 </div>
 <div>
-contacts: ${contacts}
+email: ${email}
 </div>
 <div>
-message:${message}
+message: ${message}
 </div>
-
-<a href='https://www.codewars.com/users/Zebych/completed_solutions'>codewars</a>
 </div>`,
     });
-    res.send('yes')
-})
-const port = process.env.PORT || 3010
+
+    res.send("HELLO");
+});
+let port = process.env.PORT || 3010
 app.listen(port, function () {
     console.log("Example")
 })
