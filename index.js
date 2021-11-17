@@ -34,7 +34,7 @@ app.post('/sendMessage', async function (req, res) {
     let info = await transporter.sendMail({
         from: "My profile page", // sender address
         to: "sanechek_1987@mail.ru", // list of receivers
-        subject: "тестирую", // Subject line
+        subject: "message portfolio", // Subject line
         html: `<b>сообщение с моего portfolio</b>
 <div>
 <div>
