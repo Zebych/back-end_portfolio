@@ -24,7 +24,7 @@ let transporter = nodemailer.createTransport({
     },
 });
 
-app.get('/test--shop-with-goods', function (req, res) {
+app.get('/', function (req, res) {
     res.send("HELLO");
 })
 
